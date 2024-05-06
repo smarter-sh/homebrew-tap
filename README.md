@@ -19,8 +19,8 @@ brew install smarter
 
 ## Publication
 
-1. brew tap --force homebrew/core
-2. brew create https://github.com/QueriumCorp/smarter-cli/releases/download/<tag>/smarter-macos-latest-<version>
+1. `brew tap --force homebrew/core`
+2. `brew create https://github.com/QueriumCorp/smarter-cli/releases/download/<tag>/smarter-macos-latest-<version>`
 3. update smarter.rb in this repo
-4. test your results: brew install /opt/homebrew/Library/Taps/homebrew/homebrew-core/Formula/s/smarter.rb
-5. brew developer off
+4. test your results: `brew install /opt/homebrew/Library/Taps/homebrew/homebrew-core/Formula/s/smarter.rb`
+5. `brew developer off`
