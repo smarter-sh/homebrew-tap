@@ -1,12 +1,12 @@
 class Smarter < Formula
   desc "Command-line interface for working with Smarter resources"
   homepage "https://smarter.sh/"
-  url "https://github.com/QueriumCorp/smarter-cli/releases/download/v0.0.1/smarter-macos-latest-0.0.1"
-  sha256 "47f3c5eee50922651dd2617cf7a462625f2fadad860ad55bc12d27a67b1e8a0f"
+  url "https://github.com/smarter-sh/smarter-cli/releases/download/v0.0.2/smarter-macos-latest-0.0.2"
+  sha256 "a55d557c11c31dfd28dcfa48a6fac77982f56644ce5c90a99a833f76977b5bbb"
   license "AGPL-3.0"
 
   def install
-    bin.install "smarter-macos-latest-0.0.1" => "smarter"
+    bin.install "smarter-macos-latest-0.0.2" => "smarter"
   end
 
   test do
