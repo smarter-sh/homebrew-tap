@@ -1,5 +1,8 @@
 # smarter-sh Tap
 
+This repo is maintained automatically by [smarter-sh/smarter-cli Build-Release GitHub](https://github.com/smarter-sh/smarter-cli/actions/workflows/build-release-github.yml). Avoid editing Formula/smarter.rb
+
+
 ## How do I install these formulae?
 
 `brew install smarter-sh/tap/<formula>`
