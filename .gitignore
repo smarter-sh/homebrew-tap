@@ -1,0 +1,29 @@
+# -------------------------------------
+# Homebrew reads only Formula/. Everything else here is developer tooling.
+# -------------------------------------
+
+# secrets (GH_TOKEN, for gh): never commit
+.env
+.env.*
+
+# pre-commit's Python virtual environment (make init)
+venv/
+
+# Claude Code's per-user settings
+.claude/settings.local.json
+
+# downloaded release binaries
+smarter-macos-latest-*
+
+# editors and logs
+.idea/
+.vscode/
+*.swp
+*.log
+
+# os files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+Desktop.ini

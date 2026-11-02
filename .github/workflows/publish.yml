@@ -1,3 +1,25 @@
+---
+#------------------------------------------------------------------------------
+# brew pr-pull.
+#
+# Homebrew's standard bottle-publishing workflow for a tap (from
+# brew tap-new). When a maintainer adds the pr-pull label to a pull request
+# whose brew test-bot run built bottles, it downloads them, adds their
+# bottle block to the formula, pushes the commits to main, and deletes the
+# pull request's branch.
+#
+# It isn't part of the release path. smarter-cli's Build-Release homebrew job
+# pushes formula updates to main directly, and Formula/smarter.rb installs a
+# prebuilt binary, so it has no bottles. Every other label, Dependabot's
+# included, starts this workflow but skips its job.
+#
+# It runs on pull_request_target, with write access to the repository, so
+# only a maintainer adds the pr-pull label, and only after reviewing the pull
+# request.
+#
+# Secrets: none; it uses the default GITHUB_TOKEN (contents and pull-requests:
+# write).
+#------------------------------------------------------------------------------
 name: brew pr-pull
 
 on:

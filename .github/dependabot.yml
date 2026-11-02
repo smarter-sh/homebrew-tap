@@ -1,0 +1,45 @@
+---
+# Keeps the actions the workflows use, the pre-commit hooks and their Python requirements current.
+# This repository has no alpha branch, so the pull requests go to main, where brew test-bot
+# (tests.yml) checks them. None of these touch Formula/smarter.rb, which smarter-cli's release job
+# maintains. Merging them also keeps the repository active, so GitHub doesn't disable its workflows
+# after 60 days without a commit.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    labels:
+      - "dependencies"
+      - "automated pr"
+    schedule:
+      interval: "monthly"
+    target-branch: "main"
+    assignees:
+      - "lpm0073"
+    reviewers:
+      - "lpm0073"
+  - package-ecosystem: "pre-commit"
+    directory: "/"
+    labels:
+      - "dependencies"
+      - "automated pr"
+    schedule:
+      interval: "monthly"
+    target-branch: "main"
+    assignees:
+      - "lpm0073"
+    reviewers:
+      - "lpm0073"
+  - package-ecosystem: "pip"
+    directory: "/requirements"
+    labels:
+      - "dependencies"
+      - "python"
+      - "automated pr"
+    schedule:
+      interval: "monthly"
+    target-branch: "main"
+    assignees:
+      - "lpm0073"
+    reviewers:
+      - "lpm0073"

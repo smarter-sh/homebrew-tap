@@ -1,0 +1,10 @@
+# Pull requests that change these files ask these people for a review.
+* @lpm0073
+
+# The formula decides what binary every brew install smarter puts on a user's machine.
+# smarter-cli's release job pushes its version updates to main directly, without a pull request.
+Formula/ @lpm0073
+
+# The workflows hold credentials, and the skills are instructions that coding agents follow.
+.github/ @lpm0073
+skills/ @lpm0073

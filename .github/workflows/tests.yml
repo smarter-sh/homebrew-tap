@@ -1,3 +1,26 @@
+---
+#------------------------------------------------------------------------------
+# brew test-bot.
+#
+# Homebrew's standard test workflow for a tap (from brew tap-new), on
+# ubuntu-24.04 and macos-15. It runs on pushes to main, which include
+# smarter-cli's Build-Release homebrew job, the one that updates
+# Formula/smarter.rb (commits "[CI/CD] release <version>"); on pull requests;
+# and on workflow_dispatch, which smarter-sh/automation's nightly Repository
+# Tests use to start it. Keep that trigger.
+#
+# Every event runs setup and tap-syntax: Ruby syntax, brew readall, and
+# brew style on the whole tap, which also lints shell scripts (shellcheck,
+# shfmt) and ruby code blocks in Markdown files, skills/ included. Only pull
+# requests run the formulae step, which downloads the release binary, checks
+# its sha256, installs it, runs the formula's test (smarter version), audits
+# it, and uploads any bottles as artifacts. The formula installs a macOS
+# binary only.
+#
+# make lint and make test reproduce the syntax checks locally.
+#
+# Secrets: none; it uses the default GITHUB_TOKEN.
+#------------------------------------------------------------------------------
 name: brew test-bot
 
 on:
@@ -5,6 +28,8 @@ on:
     branches:
       - main
   pull_request:
+  # the organization's nightly Repository Tests start this workflow by hand.
+  workflow_dispatch:
 
 jobs:
   test-bot:
