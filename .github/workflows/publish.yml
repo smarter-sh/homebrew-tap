@@ -27,19 +27,25 @@ on:
     types:
       - labeled
 
+permissions:
+  contents: read
+
 jobs:
   pr-pull:
     if: contains(github.event.pull_request.labels.*.name, 'pr-pull')
     runs-on: ubuntu-22.04
+    timeout-minutes: 15
     permissions:
-      contents: write
-      pull-requests: write
+      actions: read # brew pr-pull reads the test-bot run and downloads its bottle artifacts
+      checks: read
+      contents: write # pushes the bottle commits to main, and deletes the branch
+      pull-requests: write # brew pr-pull updates the pull request
     steps:
       - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@55301c8cac0982bc2fbeb71275fa0b71b963bdb1 # main
 
       - name: Set up git
-        uses: Homebrew/actions/git-user-config@master
+        uses: Homebrew/actions/git-user-config@55301c8cac0982bc2fbeb71275fa0b71b963bdb1 # main
 
       - name: Pull bottles
         env:
@@ -48,7 +54,7 @@ jobs:
         run: brew pr-pull --debug --tap="$GITHUB_REPOSITORY" "$PULL_REQUEST"
 
       - name: Push commits
-        uses: Homebrew/actions/git-try-push@master
+        uses: Homebrew/actions/git-try-push@55301c8cac0982bc2fbeb71275fa0b71b963bdb1 # main
         with:
           token: ${{ github.token }}
           branch: main
