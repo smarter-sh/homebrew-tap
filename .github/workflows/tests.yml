@@ -3,7 +3,7 @@
 # brew test-bot.
 #
 # Homebrew's standard test workflow for a tap (from brew tap-new), on
-# ubuntu-24.04 and macos-15. It runs on pushes to main, which include
+# ubuntu-24.04, plus macos-15 for pull requests. It runs on pushes to main, which include
 # smarter-cli's Build-Release homebrew job, the one that updates
 # Formula/smarter.rb (commits "[CI/CD] release <version>"); on pull requests;
 # and on workflow_dispatch, which smarter-sh/automation's nightly Repository
@@ -38,7 +38,11 @@ jobs:
   test-bot:
     strategy:
       matrix:
-        os: [ubuntu-24.04, macos-15]
+        # macos-15 only on pull requests, the one event that runs the formulae
+        # step. Pushes and nightly runs only check syntax, which ubuntu does
+        # the same way, and GitHub's macOS arm64 capacity shortages left
+        # nightly runs queued until cancelled.
+        os: ${{ github.event_name == 'pull_request' && fromJSON('["ubuntu-24.04", "macos-15"]') || fromJSON('["ubuntu-24.04"]') }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:

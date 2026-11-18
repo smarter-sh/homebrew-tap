@@ -48,7 +48,7 @@ Consequences:
 | Path                            | What lives there                                                               |
 | ------------------------------- | ------------------------------------------------------------------------------ |
 | `Formula/smarter.rb`            | The formula: desc, homepage, url, sha256, license (AGPL-3.0), install, test    |
-| `.github/workflows/tests.yml`   | `brew test-bot` on ubuntu-24.04 and macos-15                                   |
+| `.github/workflows/tests.yml`   | `brew test-bot` on ubuntu-24.04, plus macos-15 for pull requests              |
 | `.github/workflows/publish.yml` | `brew pr-pull` when a pull request gets the `pr-pull` label                    |
 | `.github/dependabot.yml`        | Monthly updates of the actions, pre-commit hooks and `requirements/`, to main  |
 | `README.md`                     | Install instructions and the manual publication steps                          |
@@ -59,7 +59,9 @@ Consequences:
 **`tests.yml` (brew test-bot)** runs on pushes to `main`, on pull requests, and on
 `workflow_dispatch`. The nightly Repository Tests workflow of `smarter-sh/automation`
 (`../automation/scripts/repository_tests.py`) starts every repository's `tests.yml` through
-`workflow_dispatch`, so that trigger must stay. Its steps, on both runners:
+`workflow_dispatch`, so that trigger must stay. Pull requests run on ubuntu-24.04 and macos-15;
+pushes and dispatches on ubuntu-24.04 only, since they check syntax only and GitHub's macOS arm64
+capacity shortages left nightly runs queued until cancelled. Its steps:
 
 | Step                                  | Runs on             | What it checks                                                    |
 | ------------------------------------- | ------------------- | ----------------------------------------------------------------- |
